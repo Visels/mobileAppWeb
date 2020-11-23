@@ -21,8 +21,6 @@ import com.app.ws.ui.shared.dto.UserDto;
 @Service
 public class UserServiceImpl implements UserService {
 
-	
-
 
 	@Autowired
 	UserRepository userRepo;

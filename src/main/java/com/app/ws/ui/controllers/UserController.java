@@ -1,5 +1,7 @@
 package com.app.ws.ui.controllers;
 
+import com.app.ws.ui.Exceptions.UserServiceExceptions;
+import com.app.ws.ui.model.response.ErrorMessages;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,8 +34,16 @@ public class UserController {
 	
 	
 	@PostMapping("/create")
-	public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) {
-				
+	public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) throws Exception {
+
+
+		//sample error message
+		if(userDetails.getFirstName().isEmpty()) {
+
+			throw new UserServiceExceptions(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+		}
+
+
 		UserRest returnValue = new UserRest();
 		
 		UserDto userDto = new UserDto();
